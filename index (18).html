@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Жизненные формы и возрастные этапы · Дендрология</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{--paper:#f2eee2;--ink:#14231a;--acc:#2f5d3a;--acc2:#8fb36a;--dk:#0f1f18;--line:rgba(20,35,26,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--dk);font-family:Inter,sans-serif;font-weight:300}
+#track{display:flex;height:100%;transition:transform .9s cubic-bezier(.77,0,.18,1)}
+.slide{flex:0 0 100vw;height:100vh;position:relative;padding:7vh 6vw 9vh;display:grid;gap:4vw;align-items:center;overflow:hidden}
+.light{background:radial-gradient(circle at 85% 10%,#fff8 0,#0000 40%),var(--paper);color:var(--ink)}
+.dark{background:radial-gradient(circle at 20% 90%,#2f5d3a55 0,#0000 50%),var(--dk);color:#efe9d8}
+.g2{grid-template-columns:1fr 1fr}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:500;line-height:1.02}
+h1{font-size:min(8vw,15vh)}h2{font-size:min(5.2vw,9.5vh);margin:1.5vh 0 2.5vh}
+h1 i,h2 i{color:var(--acc2);font-weight:500}.light h2 i{color:var(--acc)}
+p.lead{font-size:min(1.5vw,2.8vh);line-height:1.55;max-width:34em;opacity:.88}
+.chrome{position:absolute;top:3vh;left:6vw;right:6vw;display:flex;justify-content:space-between}
+canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}canvas:active{cursor:grabbing}
+.stage{height:68vh;position:relative;border:1px solid var(--line)}
+.dark .stage{border-color:#fff2}
+.tag{position:absolute;left:14px;bottom:10px}
+.list button{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid #fff3;color:inherit;padding:1.4vh 0;cursor:pointer;font:inherit;transition:.3s}
+.list button b{font:500 min(2vw,3.6vh) 'Playfair Display',serif;display:block}
+.list button span{font-size:min(1.1vw,2vh);opacity:.7}
+.list button.on{color:var(--acc2);padding-left:1.2vw}
+.bars{display:flex;gap:2vw;align-items:flex-end;height:50vh;border-bottom:1px solid var(--line)}
+.bar{flex:1;text-align:center;font-family:'Playfair Display',serif;font-size:2.2vh}
+.bar div{background:var(--acc);height:0;transition:height 1.3s cubic-bezier(.2,.8,.2,1) .4s;margin-top:.8vh}
+.active .bar div{height:var(--h)}
+.cap{display:flex;gap:2vw;margin-top:1vh}.cap span{flex:1;text-align:center}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw}
+.card{border:1px solid var(--line);padding:2.2vh 1.5vw;background:#fff6}
+.card h3{font-size:min(2.2vw,4vh);color:var(--acc);margin-bottom:.8vh}.card p{font-size:min(1.15vw,2.1vh);line-height:1.5}
+.big{font:500 min(9vw,18vh)/1 'Playfair Display',serif;color:var(--acc2)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;width:100%}
+.fact{border-top:1px solid #fff4;padding-top:2vh}.fact p{margin-top:1.2vh;font-size:min(1.2vw,2.2vh);line-height:1.5;opacity:.85}
+.steps{display:flex;gap:6px;margin:2vh 0}.steps button{flex:1;height:7px;border:0;background:#fff3;cursor:pointer}.steps button.on{background:var(--acc2)}
+.btn{margin-top:2vh;border:1px solid var(--acc2);color:var(--acc2);background:none;padding:1vh 1.4vw;font:12px 'JetBrains Mono';letter-spacing:.12em;cursor:pointer}
+#nav{position:fixed;bottom:3vh;left:6vw;right:6vw;display:flex;justify-content:space-between;align-items:center;z-index:9;mix-blend-mode:difference;color:#fff}
+#prog{height:2px;background:#fff;width:0;transition:width .8s}
+#nav button{background:none;border:0;color:#fff;font-size:22px;cursor:pointer;padding:0 10px}
+.leaf{position:absolute;right:6vw;top:5vh;width:46px;opacity:.9}
+@media(max-width:800px){.slide{grid-template-columns:1fr!important;overflow-y:auto;align-content:start}.stage{height:42vh}h1{font-size:12vw}h2{font-size:8vw}p.lead,.card p{font-size:15px}.facts{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.list button b{font-size:20px}.list button span{font-size:13px}}
+</style></head><body>
+<div id="track">
+
+<section class="slide dark g2" data-v="0">
+ <div class="chrome mono"><span>Дендрология</span><span>01 / 08</span></div>
+ <div><div class="mono">Курс · Основы</div><h1 style="margin-top:2vh">Жизненные <i>формы</i> и возрастные этапы</h1>
+ <p class="lead" style="margin-top:3vh">Как дерево выглядит, где живёт и как проходит путь от семени до старости. Крутите модель мышью — она трёхмерная.</p></div>
+ <div class="stage"><canvas id="c0"></canvas><span class="tag mono">3D · лесное дерево</span></div>
+</section>
+
+<section class="slide light g2">
+ <div class="chrome mono"><span>Основы</span><span>02 / 08</span></div>
+ <div><div class="mono">Определение</div>
+ <h2>Жизненная форма — это <i>облик</i> как ответ на среду</h2>
+ <p class="lead">Внешний вид растения (габитус), сложившийся как приспособление к условиям обитания. Термин ввёл датский ботаник Эугениус Варминг.</p></div>
+ <div><div class="big" style="color:var(--acc)">1884</div><div class="mono" style="margin-bottom:3vh">год · Варминг</div>
+ <div class="cards"><div class="card"><h3>Древесные</h3><p>Деревья, кустарники, кустарнички, лианы, подушки.</p></div><div class="card"><h3>Полудревесные</h3><p>Полукустарники и полукустарнички.</p></div></div></div>
+</section>
+
+<section class="slide dark g2" data-v="1">
+ <div class="chrome mono"><span>Жизненные формы деревьев</span><span>03 / 08</span></div>
+ <div><div class="mono">Выберите тип — модель изменится</div><h2 style="margin-bottom:2vh">Пять типов <i>деревьев</i></h2><div class="list" id="types"></div></div>
+ <div class="stage"><canvas id="c1"></canvas><span class="tag mono" id="t1"></span></div>
+</section>
+
+<section class="slide light g2" data-v="2">
+ <div class="chrome mono"><span>Высота</span><span>04 / 08</span></div>
+ <div><div class="mono">Классы высоты деревьев</div><h2>Д1 — Д4: от гиганта до <i>малыша</i></h2>
+ <div class="bars"><div class="bar">Д1<div style="--h:100%"></div></div><div class="bar">Д2<div style="--h:72%"></div></div><div class="bar">Д3<div style="--h:50%"></div></div><div class="bar">Д4<div style="--h:30%"></div></div></div>
+ <div class="cap mono"><span>выше 25 м</span><span>15–25 м</span><span>10–15 м</span><span>до 10 м</span></div></div>
+ <div class="stage" style="background:#14231a"><canvas id="c2"></canvas><span class="tag mono" style="color:#efe9d8">3D · сравнение масштаба</span></div>
+</section>
+
+<section class="slide light" style="grid-template-columns:1fr 1.5fr">
+ <div class="chrome mono"><span>Кустарниковые формы</span><span>05 / 08</span></div>
+ <div><div class="mono">Не только деревья</div><h2>Кусты, кустарнички, <i>лианы</i></h2>
+ <p class="lead">Кустарники делят по высоте: К1 — 3–6 м, К2 — 2–3 м, К3 — 1–2 м, К4 — 0,8–1 м.</p></div>
+ <div class="cards">
+  <div class="card"><h3>Кустарник</h3><p>Несколько стволиков, главный ствол теряется. Орешник, сирень.</p></div>
+  <div class="card"><h3>Кустарничек</h3><p>Низкий, из спящих почек. Черника, брусника, клюква.</p></div>
+  <div class="card"><h3>Полукустарник</h3><p>Верх побегов травянистый и отмирает.</p></div>
+  <div class="card"><h3>Лиана</h3><p>Нужна опора. Виноград, лимонник, плющ.</p></div></div>
+</section>
+
+<section class="slide dark g2" data-v="3">
+ <div class="chrome mono"><span>Онтогенез</span><span>06 / 08</span></div>
+ <div><div class="mono">5 этапов жизни</div><h2>От семени до <i>старости</i></h2>
+ <div class="steps" id="steps"></div><h3 id="sn" style="font-size:min(3.2vw,6vh);color:var(--acc2)"></h3><p class="lead" id="sd" style="margin-top:1.5vh"></p>
+ <button class="btn" id="play">▶ ПРОИГРАТЬ РОСТ</button></div>
+ <div class="stage"><canvas id="c3"></canvas><span class="tag mono">3D · возраст дерева</span></div>
+</section>
+
+<section class="slide dark" style="align-content:center;gap:5vh">
+ <div class="chrome mono"><span>Интересное</span><span>07 / 08</span></div>
+ <div><div class="mono">Поликарпики — плодоносят много раз</div><h2>Рекорды <i>древесного</i> мира</h2></div>
+ <div class="facts">
+  <div class="fact"><div class="big">115 м</div><div class="serif">Гиперион</div><p>Секвойя вечнозелёная в Калифорнии — самое высокое известное дерево.</p></div>
+  <div class="fact"><div class="big">4800+</div><div class="serif">Мафусаил</div><p>Сосна остистая — одно из старейших отдельных деревьев планеты, возраст в годах.</p></div>
+  <div class="fact"><div class="big">47 000</div><div class="serif">Пандо</div><p>Клон осины в Юте: десятки тысяч стволов с одной корневой системой.</p></div></div>
+</section>
+
+<section class="slide dark g2" data-v="4">
+ <div class="chrome mono"><span>Итоги</span><span>08 / 08</span></div>
+ <div><div class="mono">Вывод</div><h2 style="font-size:min(6vw,11vh)">Форма — это <i>история</i> приспособления</h2>
+ <p class="lead">Жизненная форма отвечает на вопрос «как живёт», возрастной этап — «на каком отрезке пути». Вместе они описывают любое дерево.</p>
+ <div class="mono" style="margin-top:4vh">Спасибо за внимание</div></div>
+ <div class="stage"><canvas id="c4"></canvas><span class="tag mono">3D · цветущая крона</span></div>
+</section>
+</div>
+
+<div id="nav"><button id="pv">←</button><div style="flex:1;margin:0 2vw"><div id="prog"></div></div><button id="nx">→</button></div>
+
+<script>
+const T=THREE,V=(x,y,z)=>new T.Vector3(x,y,z);let seed=7;const R=()=>(seed=seed*16807%2147483647)/2147483647;
+const M=c=>new T.MeshStandardMaterial({color:c,flatShading:true,roughness:.9});
+const bark=M(0x5a4030),leaf=[M(0x2f6b3a),M(0x3f8a47),M(0x57a14f)],old=M(0x9a8a3a),needle=M(0x1f4d33),shoot=M(0xa6c45e),red=M(0xd9435a),pink=M(0xf6c1d0);
+const blob=(r,x,y,z,m,sx=1,sy=.8)=>{const g=new T.Mesh(new T.IcosahedronGeometry(r,1),m);g.position.set(x,y,z);g.scale.set(sx,sy,sx);return g};
+const limb=(a,b,r0,r1,m=bark)=>{const d=new T.Vector3().subVectors(b,a),l=d.length(),g=new T.Mesh(new T.CylinderGeometry(r1,r0,l,6),m);g.position.copy(a).add(b).multiplyScalar(.5);g.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());return g};
+function forest(s=1,o={}){seed=7;const g=new T.Group(),H=6*s;g.add(limb(V(0,0,0),V(0,H,0),.3*s,.1*s));
+ for(let i=0;i<(o.old?5:11);i++){const a=R()*6.28,h=H*(.6+R()*.45),r=(1.2+R()*.6)*s*(o.old?.85:1),b=V(Math.cos(a)*r*.7,h,Math.sin(a)*r*.7);
+  g.add(limb(V(0,H*(.45+R()*.3),0),b,.08*s,.03*s));g.add(blob((.9+R()*.5)*s,b.x,b.y+.3*s,b.z,o.old?old:leaf[i%3]))}
+ g.add(blob(1.3*s,0,H+.4*s,0,o.old?old:leaf[1]));
+ if(o.fruit)for(let i=0;i<30;i++){const a=R()*6.28,u=R()*2-1,q=Math.sqrt(1-u*u)*2.2*s;g.add(blob(.11*s,Math.cos(a)*q,H*.92+u*1.5*s,Math.sin(a)*q,i%2?red:pink,1,1))}
+ if(o.old)g.rotation.z=.1;return g}
+function bush(){seed=3;const g=new T.Group();for(let i=0;i<6;i++){const a=i*1.05,t=V(Math.cos(a)*1.1,2.8+R()*.8,Math.sin(a)*1.1);g.add(limb(V(0,0,0),t,.12,.05));g.add(blob(.75,t.x,t.y+.2,t.z,leaf[i%3]))}return g}
+function steppe(){seed=5;const g=new T.Group();g.add(limb(V(0,0,0),V(0,1.3,0),.25,.18));
+ for(let i=0;i<7;i++){const a=i*.9,b=V(Math.cos(a)*1.9,1.9+R()*.9,Math.sin(a)*1.9);g.add(limb(V(0,1.2,0),b,.1,.04));g.add(blob(1,b.x,b.y+.3,b.z,leaf[i%3],1,.75));
+  g.add(blob(.12,b.x*1.1,b.y-.2,b.z*1.1,red,1,1))}g.add(blob(1.4,0,2.7,0,leaf[1],1,.7));return g}
+function succ(){seed=9;const g=new T.Group();g.add(limb(V(0,0,0),V(.3,1.4,0),.3,.2));g.add(limb(V(.3,1.4,0),V(-.2,2.7,.2),.2,.1));
+ for(let i=0;i<26;i++){const a=R()*6.28,y=1.6+R()*1.2,o=V(Math.cos(a)*(.4+R()*.3),y,Math.sin(a)*(.4+R()*.3)),e=V(o.x*2.8,y-.3-R()*.9,o.z*2.8);g.add(limb(o,e,.04,.015,shoot))}return g}
+function creep(){seed=2;const g=new T.Group();let p=V(-3,.15,0);for(let i=0;i<8;i++){const n=V(p.x+.8,.15+Math.sin(i)*.1,Math.sin(i*1.3)*.5);g.add(limb(p,n,.16,.14));
+ if(i%2==0){const t=V(n.x+.2,1.6+R()*.8,n.z+(R()-.5));g.add(limb(n,t,.07,.03));g.add(blob(.55,t.x,t.y+.2,t.z,needle,1,1.2))}g.add(limb(n,V(n.x,-.15,n.z),.04,.02));p=n}return g}
+const TY=[["Лесной","Один ствол всю жизнь","дуб, берёза, сосна",()=>forest(1)],["Кустовидный","Несколько стволов от основания","рябина, ольха серая",bush],["Лесостепной (плодовый)","Крона от земли, главной оси нет","яблоня, абрикос",steppe],["Сезонно-суккулентный","Листья редуцированы, фотосинтез зелёными побегами","саксаул, джузгун",succ],["Стланец","Ствол полегает и укореняется","кедр-стланик, можжевельник казахский",creep]];
+const ST=[["Эмбриональный","Зародыш спит внутри семени."],["Ювенильный","Прорастание: всходы и первые листья."],["Виргинильный","Активный рост, цветения ещё нет."],["Генеративный","Цветение и плодоношение — созрели семена."],["Старость","Рост затихает, крона редеет и усыхает."]];
+const stageTree=i=>{const g=new T.Group();if(i==0)g.add(blob(.35,0,.15,0,bark,1,.6));else if(i==1){g.add(limb(V(0,0,0),V(0,1,0),.06,.04,shoot));g.add(blob(.35,.3,1,0,leaf[2],1,.3));g.add(blob(.35,-.3,1.1,0,leaf[2],1,.3))}
+ else g.add(i==2?forest(.55):i==3?forest(1,{fruit:1}):forest(.95,{old:1}));return g};
+const views=[];
+function viewer(id,build,d,h,idx){const c=document.getElementById(id),r=new T.WebGLRenderer({canvas:c,antialias:true,alpha:true}),sc=new T.Scene(),cam=new T.PerspectiveCamera(40,1,.1,200),P=new T.Group();
+ sc.add(new T.HemisphereLight(0xffffff,0x405040,.95));const L=new T.DirectionalLight(0xfff2d0,1.1);L.position.set(5,9,6);sc.add(L);sc.add(P);
+ const gr=new T.Mesh(new T.CylinderGeometry(7,7,.2,40),M(0x2a4a30));gr.position.y=-.1;P.add(gr);
+ cam.position.set(0,h+d*.25,d);cam.lookAt(0,h,0);const v={idx,on:false,drag:false,cur:null,set(fn){if(v.cur)P.remove(v.cur);v.cur=fn();P.add(v.cur)},
+ draw(){const w=c.clientWidth,hh=c.clientHeight;if(c.width!=w||c.height!=hh){r.setSize(w,hh,false);cam.aspect=w/hh;cam.updateProjectionMatrix()}if(!v.drag)P.rotation.y+=.006;r.render(sc,cam)}};
+ let x;c.onpointerdown=e=>{v.drag=true;x=e.clientX;c.setPointerCapture(e.pointerId)};c.onpointermove=e=>{if(v.drag){P.rotation.y+=(e.clientX-x)*.01;x=e.clientX}};c.onpointerup=()=>v.drag=false;
+ v.set(build);views.push(v);return v}
+viewer('c0',()=>forest(1),11,2.8,0);
+const v1=viewer('c1',TY[0][3],11,2.4,1);
+viewer('c2',()=>{const g=new T.Group();[[1,-5],[.67,-1.8],[.42,1.1],[.27,3.2]].forEach(([s,x])=>{const t=forest(s);t.position.x=x;g.add(t)});return g},15,3.6,2);
+const v3=viewer('c3',()=>stageTree(0),11,2.4,3);
+viewer('c4',()=>forest(1,{fruit:1}),11,3,4);
+const tl=document.getElementById('types');TY.forEach((t,i)=>{const b=document.createElement('button');b.innerHTML=`<b>${t[0]}</b><span>${t[1]} · ${t[2]}</span>`;b.onclick=()=>{[...tl.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');v1.set(t[3]);document.getElementById('t1').textContent='3D · '+t[0]};tl.appendChild(b)});tl.children[0].click();
+let st=0,timer;const sb=document.getElementById('steps');
+function setSt(i){st=i;[...sb.children].forEach((b,j)=>b.classList.toggle('on',j<=i));document.getElementById('sn').textContent=`${i+1}. ${ST[i][0]}`;document.getElementById('sd').textContent=ST[i][1];v3.set(()=>stageTree(i))}
+ST.forEach((s,i)=>{const b=document.createElement('button');b.onclick=()=>{clearInterval(timer);setSt(i)};sb.appendChild(b)});setSt(0);
+document.getElementById('play').onclick=()=>{clearInterval(timer);setSt(0);timer=setInterval(()=>st<4?setSt(st+1):clearInterval(timer),1800)};
+const S=[...document.querySelectorAll('.slide')],tr=document.getElementById('track');let cur=0;
+function go(i){cur=Math.max(0,Math.min(S.length-1,i));tr.style.transform=`translateX(-${cur*100}vw)`;S.forEach((s,j)=>s.classList.toggle('active',j==cur));
+ document.getElementById('prog').style.width=(cur+1)/S.length*100+'%';views.forEach(v=>v.on=S[cur].dataset.v==v.idx)}
+pv.onclick=()=>go(cur-1);nx.onclick=()=>go(cur+1);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))go(cur+1);if(['ArrowLeft','PageUp'].includes(e.key))go(cur-1)});
+let tx;addEventListener('touchstart',e=>tx=e.touches[0].clientX);addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
+let wl=0;addEventListener('wheel',e=>{if(Date.now()-wl>900&&Math.abs(e.deltaY+e.deltaX)>30){wl=Date.now();go(cur+(e.deltaY+e.deltaX>0?1:-1))}});
+(function loop(){views.forEach(v=>v.on&&v.draw());requestAnimationFrame(loop)})();go(0);
+</script></body></html>
